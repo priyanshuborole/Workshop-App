@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -93,5 +95,9 @@ class LoginFragment : Fragment() {
                 progressBar.dismiss()
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+           findNavController().navigate(R.id.action_loginFragment_to_availableWorkshopFragment)
+        }
+
     }
 }

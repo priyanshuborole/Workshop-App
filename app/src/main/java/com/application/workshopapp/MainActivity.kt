@@ -31,12 +31,20 @@ class MainActivity : AppCompatActivity() {
         val workshopSqliteHelper = WorkshopSqliteHelper(this)
         repository = WorkshopRepository(workshopSqliteHelper)
         sharedPreferences = getSharedPreferences(Constant.SP_NAME, Context.MODE_PRIVATE)
+//        val isUser = sharedPreferences.getBoolean(Constant.USER_SIGNED_IN,false)
+//        if(!isUser){
+//            repository.deleteAppliedWorkshops()
+//        }
         val actionBar = supportActionBar
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#254e5e")))
         window.statusBarColor = ContextCompat.getColor(this, R.color.green)
         addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu, menu)
+                val isUser = sharedPreferences.getBoolean(Constant.USER_SIGNED_IN,false)
+                if(!isUser){
+                   menu.clear()
+                }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -57,25 +65,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menuInflater.inflate(R.menu.menu, menu)
-//        return true
-//    }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.logOut -> {
-//                firebaseAuth.signOut()
-//                sharedPreferences.edit().putBoolean(Constant.USER_SIGNED_IN,false)?.apply()
-//                repository.deleteAppliedWorkshops()
-//                Toast.makeText(this,"Logged Out",Toast.LENGTH_SHORT).show()
-//                val navController = findNavController(R.id.nav_host_fragment)
-//                navController.navigate(R.id.loginFragment)
-//
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-
 }

@@ -22,4 +22,7 @@ class AvailableWorkshopVM(
     fun applyToWorkshop(studentId: Int, workshopId: Int) {
             workshopRepository.applyToWorkshop(studentId, workshopId)
     }
+    fun deleteAppliedWorkshops() {
+            workshopRepository.deleteAppliedWorkshops()
+    }
 }
