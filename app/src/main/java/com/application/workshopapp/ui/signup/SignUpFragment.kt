@@ -3,12 +3,13 @@ package com.application.workshopapp.ui.signup
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.application.workshopapp.R
 import com.application.workshopapp.databinding.FragmentSignUpBinding
@@ -21,6 +22,7 @@ class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +36,21 @@ class SignUpFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "Signup"
         firebaseAuth = FirebaseAuth.getInstance()
         val sharedPreferences: SharedPreferences? = activity?.getSharedPreferences(Constant.SP_NAME, Context.MODE_PRIVATE)
+        val menuHost: MenuHost = requireActivity()
 
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu, menu)
+                menu.clear()
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
         binding.goToLogin.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
         }

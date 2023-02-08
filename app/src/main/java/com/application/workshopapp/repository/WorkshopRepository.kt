@@ -9,4 +9,5 @@ class WorkshopRepository(private  val workshopSqliteHelper : WorkshopSqliteHelpe
     fun getAppliedWorkshops(studentId: Int): ArrayList<Workshop>  = workshopSqliteHelper.getAppliedWorkshops(studentId)
     fun applyToWorkshop(studentId: Int, workshopId: Int) = workshopSqliteHelper.applyToWorkshop(studentId, workshopId)
     fun isWorkshopApplied(studentId: Int, workshopId: Int) = workshopSqliteHelper.isWorkshopApplied(studentId, workshopId)
+    fun deleteAppliedWorkshops() = workshopSqliteHelper.deleteAppliedWorkshops()
 }

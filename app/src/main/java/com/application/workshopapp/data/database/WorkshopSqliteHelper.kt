@@ -136,4 +136,10 @@ class WorkshopSqliteHelper(context: Context) :
         cursor.close()
         return count > 0
     }
+
+    fun deleteAppliedWorkshops() {
+        val db = this.writableDatabase
+        db.delete(STUDENT_WORKSHOPS_TABLE_NAME,null, null)
+        db.close()
+    }
 }
